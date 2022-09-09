@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -15,7 +16,7 @@ public class URLController {
     private URLService urlService;
 
     @PostMapping("/shortenURL")
-    public ResponseEntity<?> getShortURL(GetShortURLRequest getURLRequest) {
+    public ResponseEntity<?> getShortURL(@RequestBody GetShortURLRequest getURLRequest) {
         try {
             return new ResponseEntity<>(urlService.getShortURL(getURLRequest), HttpStatus.CREATED);
         } catch (InvalidURLExecption ex) {
