@@ -1,16 +1,15 @@
 package com.myurl.shortener.controllers;
 
-import com.myurl.shortener.dtos.requests.GetLongURLRequest;
 import com.myurl.shortener.dtos.requests.GetShortURLRequest;
 import com.myurl.shortener.exceptions.InvalidURLExecption;
 import com.myurl.shortener.services.URLService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 
 @RestController
 public class URLController {
@@ -26,12 +25,10 @@ public class URLController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<?> getLongURL(@RequestBody GetLongURLRequest getURLRequest) {
-        try {
-            return new ResponseEntity<>(urlService.getLongURL(getURLRequest), HttpStatus.CREATED);
-        } catch (InvalidURLExecption ex) {
-            return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+    @GetMapping("/{shortURL}")
+    public ResponseEntity<Void> getLongURL(@PathVariable String shortURL) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(URI.create(urlService.getLongURL(shortURL).getLongURL()));
+        return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
     }
 }

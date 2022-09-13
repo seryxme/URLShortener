@@ -11,6 +11,8 @@ import com.myurl.shortener.utils.IDConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
+
 @Service
 public class URLServiceImpl implements URLService {
 
@@ -28,7 +30,7 @@ public class URLServiceImpl implements URLService {
         String subDir = getSubDirectory(newUrRL.getId());
 
         GetShortURLResponse response = new GetShortURLResponse();
-        response.setShortURL("https://myurl.com/" + subDir);
+        response.setShortURL("localhost:8080/" + subDir);
         return response;
     }
 
@@ -45,9 +47,8 @@ public class URLServiceImpl implements URLService {
     }
 
     @Override
-    public GetLongURLResponse getLongURL(GetLongURLRequest getURLRequest) throws InvalidURLExecption {
-        isValidURL(getURLRequest.getShortURL());
-        String id = String.valueOf(getRequestID(getURLRequest.getShortURL()));
+    public GetLongURLResponse getLongURL(String shortURL) {
+        String id = String.valueOf(getRequestID(shortURL));
 
         GetLongURLResponse response = new GetLongURLResponse();
         response.setLongURL(urlRepository.findURLLinkById(id).getLink());

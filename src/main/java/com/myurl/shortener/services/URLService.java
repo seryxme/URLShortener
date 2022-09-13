@@ -9,7 +9,7 @@ import com.myurl.shortener.exceptions.InvalidURLExecption;
 public interface URLService {
     GetShortURLResponse getShortURL(GetShortURLRequest getURLRequest) throws InvalidURLExecption;
 
-    GetLongURLResponse getLongURL(GetLongURLRequest getURLRequest) throws InvalidURLExecption;
+    GetLongURLResponse getLongURL(String shortUrl);
 
     long numOfURLs();
 }
