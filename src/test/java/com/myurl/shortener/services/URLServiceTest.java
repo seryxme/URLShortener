@@ -21,7 +21,7 @@ class URLServiceTest {
         request.setLongURL("https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=FinTech+%28Financial+Technology%29%3A+What+is+It+and+How+to+Use+Technologies+to+Create+Business+Value+in+Fintech+Way%3F&btnG=");
         GetShortURLResponse response = urlService.getShortURL(request);
         assertEquals(1, urlService.numOfURLs());
-        assertEquals("localhost:8080/a", response.getShortURL());
+        assertEquals("https://www.myurl.com/a", response.getShortURL());
     }
 
     @Test

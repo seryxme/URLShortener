@@ -6,6 +6,7 @@ import com.myurl.shortener.dtos.requests.GetShortURLRequest;
 import com.myurl.shortener.dtos.responses.GetLongURLResponse;
 import com.myurl.shortener.dtos.responses.GetShortURLResponse;
 import com.myurl.shortener.utils.IDConverter;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +24,10 @@ public class URLServiceImpl implements URLService {
         newUrRL.setId(generateId());
         urlRepository.save(newUrRL);
 
+        Dotenv dotenv = Dotenv.load();
+
         GetShortURLResponse response = new GetShortURLResponse();
-        response.setShortURL("localhost:8080/" + newUrRL.getId());
+        response.setShortURL(dotenv.get("LOCAL") + newUrRL.getId());
         return response;
     }
 

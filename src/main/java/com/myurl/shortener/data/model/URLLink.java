@@ -10,7 +10,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 @NoArgsConstructor
-@Document("URL links")
+@Document("URL Links")
 public class URLLink {
 
     @Id
