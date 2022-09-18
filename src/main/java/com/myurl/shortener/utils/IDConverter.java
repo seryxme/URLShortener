@@ -6,19 +6,22 @@ import java.util.List;
 public class IDConverter {
     private static final char[] char62Array =
             "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
-    private static final List<Integer> remainderList = new ArrayList<>();
-    public static String convertRequestID(int requestID) {
-        if (requestID < 62) return String.valueOf(char62Array[requestID]);
+    private static final List<Long> remainderList = new ArrayList<>();
+    public static String convertRequestID(Long requestID) {
+        if (requestID < 62) {
+            long request = requestID;
+            return String.valueOf(char62Array[(int) request]);
+        }
 
-        int divisor = requestID;
+        long divisor = requestID;
         while (divisor != 0) {
             remainderList.add(0, divisor % 62);
             divisor /= 62;
         }
 
         StringBuilder convertedKey = new StringBuilder();
-        for(Integer remainder: remainderList) {
-            convertedKey.append(char62Array[remainder]);
+        for(long remainder: remainderList) {
+            convertedKey.append(char62Array[(int) remainder]);
         }
         remainderList.clear();
         return convertedKey.toString();
