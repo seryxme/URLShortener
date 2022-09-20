@@ -3,6 +3,7 @@ package com.myurl.shortener.controllers;
 import com.myurl.shortener.dtos.requests.GetShortURLRequest;
 import com.myurl.shortener.exceptions.InvalidURLException;
 import com.myurl.shortener.services.URLService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,9 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 
 @RestController
+@AllArgsConstructor
 public class URLController {
-    @Autowired
-    private URLService urlService;
+    private final URLService urlService;
 
     @PostMapping("/shortenURL")
     public ResponseEntity<?> getShortURL(@RequestBody GetShortURLRequest getURLRequest) {

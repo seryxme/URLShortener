@@ -7,14 +7,14 @@ import com.myurl.shortener.dtos.responses.GetLongURLResponse;
 import com.myurl.shortener.dtos.responses.GetShortURLResponse;
 import com.myurl.shortener.utils.IDConverter;
 import io.github.cdimascio.dotenv.Dotenv;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class URLServiceImpl implements URLService {
 
-    @Autowired
-    URLRepository urlRepository;
+    private final URLRepository urlRepository;
 
     @Override
     public GetShortURLResponse getShortURL(GetShortURLRequest getURLRequest) {
