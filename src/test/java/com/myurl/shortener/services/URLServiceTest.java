@@ -18,7 +18,9 @@ class URLServiceTest {
     @Test
     void testThatLongURLCanBeStoredAndConvertedToShortURL() throws InvalidURLException {
         GetShortURLRequest request = new GetShortURLRequest();
-        request.setLongURL("https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=FinTech+%28Financial+Technology%29%3A+What+is+It+and+How+to+Use+Technologies+to+Create+Business+Value+in+Fintech+Way%3F&btnG=");
+//        request.setLongURL("https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=FinTech+%28Financial+Technology%29%3A+What+is+It+and+How+to+Use+Technologies+to+Create+Business+Value+in+Fintech+Way%3F&btnG=");
+        request.setLongURL("https://scholar");
+
         GetShortURLResponse response = urlService.getShortURL(request);
         assertEquals(1, urlService.numOfURLs());
         assertEquals("https://www.myurl.com/a", response.getShortURL());

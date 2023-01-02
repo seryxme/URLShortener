@@ -4,12 +4,12 @@ import com.myurl.shortener.dtos.requests.GetShortURLRequest;
 import com.myurl.shortener.exceptions.InvalidURLException;
 import com.myurl.shortener.services.URLService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -18,7 +18,7 @@ public class URLController {
     private final URLService urlService;
 
     @PostMapping("/shortenURL")
-    public ResponseEntity<?> getShortURL(@RequestBody GetShortURLRequest getURLRequest) {
+    public ResponseEntity<?> getShortURL(@Valid @RequestBody GetShortURLRequest getURLRequest) {
         try {
             return new ResponseEntity<>(urlService.getShortURL(getURLRequest), HttpStatus.CREATED);
         } catch (InvalidURLException ex) {

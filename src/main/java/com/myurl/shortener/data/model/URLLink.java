@@ -16,7 +16,5 @@ public class URLLink {
     @Id
     String id;
 
-    @URL
-    @NotEmpty
     String link;
 }
