@@ -9,7 +9,6 @@ import com.myurl.shortener.exceptions.InvalidURLException;
 import com.myurl.shortener.utils.IDConverter;
 import io.github.cdimascio.dotenv.Dotenv;
 import lombok.AllArgsConstructor;
-import org.hibernate.validator.constraints.URL;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,7 +18,7 @@ public class URLServiceImpl implements URLService {
     private final URLRepository urlRepository;
 
     @Override
-    public GetShortURLResponse getShortURL(@URL GetShortURLRequest getURLRequest) throws InvalidURLException {
+    public GetShortURLResponse getShortURL(GetShortURLRequest getURLRequest) throws InvalidURLException {
         isValidURL(getURLRequest.getLongURL());
         URLLink newURL = new URLLink();
         newURL.setLink(getURLRequest.getLongURL());
@@ -29,8 +28,7 @@ public class URLServiceImpl implements URLService {
         Dotenv dotenv = Dotenv.load();
 
         GetShortURLResponse response = new GetShortURLResponse();
-//        response.setShortURL(System.getenv("url") + "/" + newURL.getId());
-        response.setShortURL(dotenv.get("URL") + "/" + newURL.getId());
+        response.setShortURL(dotenv.get("LOCAL") + "/" + newURL.getId());
         return response;
     }
 

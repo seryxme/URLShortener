@@ -34,6 +34,7 @@ class URLServiceTest {
 
         GetLongURLRequest request1 = new GetLongURLRequest();
         request1.setShortURL(response.getShortURL());
+        System.out.println(request1.getShortURL());
         GetLongURLResponse response1 = urlService.getLongURL(request1.getShortURL());
         assertEquals("https://www.statista.com/outlook/dmo/fintech/worldwide", response1.getLongURL());
     }
