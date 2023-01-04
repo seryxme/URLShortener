@@ -1,0 +1,11 @@
+h2 {
+    margin: 20px;
+}
+
+.url-box {
+    background-color: burlywood;
+    margin-left: 30%;
+    margin-right: 30%;
+    padding: 30px;
+    box-shadow: 5px 5px #888888;
+}
